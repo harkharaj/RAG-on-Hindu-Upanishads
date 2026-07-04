@@ -8,12 +8,16 @@ __pycache__/
 
 # data: the PDFs' translations are copyrighted (Ramakrishna Math, Advaita
 # Ashram, Chinmaya Mission, etc.) — keep the corpora and anything derived from
-# them out of the public repo. Rebuild locally with:
+# them out of any PUBLIC repo. Rebuild locally with:
 #   python src/ingest.py && python src/ingest_ashtavakra.py && python src/index.py
 108upanishads.pdf
 ASHTAVAKRA_GITA.pdf
 Srimad-Bhagavad-Gita-Shankara-Bhashya-English.pdf
-data/
+# Ignore the raw PDFs and intermediate corpora, but KEEP the built Chroma vector
+# DB so the app can run when deployed. NOTE: data/chroma still contains the
+# copyrighted verse text — only commit it to a PRIVATE repo, never a public one.
+data/*
+!data/chroma/
 
 # streamlit
 .streamlit/secrets.toml

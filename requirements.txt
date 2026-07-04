@@ -1,3 +1,6 @@
+# CPU-only torch — avoids the multi-GB CUDA build that breaks Streamlit Cloud.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
 sentence-transformers
 chromadb
 groq
