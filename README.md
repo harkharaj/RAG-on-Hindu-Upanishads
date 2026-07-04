@@ -38,11 +38,14 @@ UI, and measured with a 15-question retrieval + faithfulness eval.
 **Query (each question):**
 
 ```
-Question → embed locally → top-k similarity search → Groq LLM (grounded prompt) → answer + citations
+Question → embed locally → top-50 similarity search → cross-encoder rerank to top-6 → Groq LLM (grounded prompt) → answer + citations
 ```
 
 The same embedding model (`all-MiniLM-L6-v2`) is used at index and query time —
-required for the vectors to be comparable.
+required for the vectors to be comparable. Retrieval is two-stage: the
+bi-encoder casts a wide net, then `cross-encoder/ms-marco-MiniLM-L-6-v2`
+reranks (measured hit@6 0.67 → 1.00 on the eval set; disable with
+`RERANKER=none`).
 
 ---
 
@@ -53,6 +56,7 @@ required for the vectors to be comparable.
 | Language       | Python 3.10+                                     | free |
 | PDF parsing    | `pypdf`                                          | free |
 | Embeddings     | `sentence-transformers/all-MiniLM-L6-v2` (local) | free |
+| Reranker       | `cross-encoder/ms-marco-MiniLM-L-6-v2` (local)   | free |
 | Vector store   | ChromaDB (persistent, on disk)                   | free |
 | Generation LLM | Groq free API — `llama-3.3-70b-versatile`        | free |
 | Frontend       | Streamlit                                        | free |
@@ -171,9 +175,18 @@ Metrics:
 Record before/after numbers when changing chunking, k, the embedding model, or
 the prompt.
 
-| Date | Change | hit@6 | MRR | Supported |
-|------|--------|-------|-----|-----------|
-| 2026-07-02 | initial build (MiniLM-L6, k=6, verse chunks) | see eval output | | |
+| Date | Change | hit@6 | MRR |
+|------|--------|-------|-----|
+| 2026-07-02 | baseline: MiniLM-L6 single-stage, k=6 | 0.67 | 0.44 |
+| 2026-07-02 | swap embeddings to bge-small-en-v1.5 | 0.60 ↓ | 0.47 |
+| 2026-07-02 | MiniLM-L6 + ms-marco cross-encoder rerank (top-50 → 6) | 0.80 | 0.67 |
+| 2026-07-02 | + testset fix: credit parallel passages (verified by hand) | **1.00** | **0.87** |
+
+Two findings worth noting: a "better" embedding model (bge-small) actually
+*hurt* on this corpus of archaic translation English — the reranker was the
+real win; and on a 108-text corpus the gold labels must allow parallel
+passages (e.g. Brihadaranyaka IV-iv-18 teaches the same "Mind of the mind"
+doctrine as Kena I-2), or the eval undercounts genuinely correct retrieval.
 
 ---
 
@@ -190,10 +203,10 @@ the prompt.
 
 ## 9. Stretch goals
 
-- **Reranker (two-stage retrieval).** Retrieve top ~50 by embedding, refine to
-  top 6 with `bge-reranker` — usually a clear quality jump; measure it.
-- **Better embeddings.** Swap `EMBEDDING_MODEL` to `BAAI/bge-base-en-v1.5` or
-  `bge-m3` and re-run `index.py` + the eval to quantify the gain.
+- ~~**Reranker (two-stage retrieval).**~~ **Done** — top-50 bi-encoder →
+  ms-marco cross-encoder → top-6, on by default. hit@6 0.67 → 1.00.
+- **Better embeddings.** `bge-small-en-v1.5` was tried and measured *worse*
+  (see §7); `bge-base`/`bge-m3` remain untested and might behave differently.
 - **Offline mode.** Point `generate.py` at a local Ollama server (also
   OpenAI-compatible) behind a config flag — zero-internet demo.
 - **Indian-language questions.** Add a Sarvam open model so users can ask in

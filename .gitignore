@@ -17,3 +17,6 @@ data/
 
 # local Claude Code config
 .claude/
+
+# local build log / notes
+problems.md

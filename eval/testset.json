@@ -17,7 +17,8 @@
   {
     "question": "What does 'That thou art' (Tat tvam asi) mean?",
     "expected": [
-      {"upanishad": "Chandogya", "refs": ["VI-viii-7", "VI-ix-4", "VI-x-3", "VI-xi-3", "VI-xii-3", "VI-xiii-3", "VI-xiv-3", "VI-xv-3", "VI-xvi-3"]}
+      {"upanishad": "Chandogya", "refs": ["VI-viii-7", "VI-ix-4", "VI-x-3", "VI-xi-3", "VI-xii-3", "VI-xiii-3", "VI-xiv-3", "VI-xv-3", "VI-xvi-3"]},
+      {"upanishad": "Suka Rahasya", "refs": ["40-42", "43", "44"]}
     ]
   },
   {
@@ -30,7 +31,10 @@
   },
   {
     "question": "Who impels the mind and the vital force to do their work?",
-    "expected": [{"upanishad": "Kena", "refs": ["I-1", "I-2"]}]
+    "expected": [
+      {"upanishad": "Kena", "refs": ["I-1", "I-2"]},
+      {"upanishad": "Brihadaranyaka", "refs": ["IV-iv-18"]}
+    ]
   },
   {
     "question": "By renouncing what should one enjoy? Should we covet the wealth of others?",
@@ -38,7 +42,10 @@
   },
   {
     "question": "What are the four states of consciousness — waking, dream, deep sleep, and the fourth?",
-    "expected": [{"upanishad": "Mandukya", "refs": ["I-", "II-"]}]
+    "expected": [
+      {"upanishad": "Mandukya", "refs": ["I-", "II-"]},
+      {"upanishad": "Narada Parivrajaka", "refs": ["VI-4"]}
+    ]
   },
   {
     "question": "Where is real happiness — in the finite or the infinite (Bhuma)?",

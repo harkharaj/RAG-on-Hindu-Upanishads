@@ -21,6 +21,20 @@ COLLECTION = "upanishads"
 EMBEDDING_MODEL = os.environ.get(
     "EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2"
 )
+# BGE models retrieve better when the *query* (not the passages) is prefixed
+# with their instruction string.
+QUERY_PREFIX = (
+    "Represent this sentence for searching relevant passages: "
+    if "bge" in EMBEDDING_MODEL.lower()
+    else ""
+)
+# Two-stage retrieval: cast a wide net with the bi-encoder, then let a
+# cross-encoder rerank down to k. On by default (local + free, measured
+# hit@6 0.67 -> 0.87 on the eval set); set RERANKER=none for single-stage.
+RERANKER = os.environ.get("RERANKER", "cross-encoder/ms-marco-MiniLM-L-6-v2")
+if RERANKER.lower() in ("", "none", "off"):
+    RERANKER = ""
+FETCH_K = int(os.environ.get("FETCH_K", "50"))
 
 
 @lru_cache(maxsize=1)
@@ -36,12 +50,21 @@ def _collection():
     return client.get_collection(COLLECTION)
 
 
+@lru_cache(maxsize=1)
+def _reranker():
+    from sentence_transformers import CrossEncoder
+
+    return CrossEncoder(RERANKER)
+
+
 def retrieve(query: str, k: int = 5, upanishad: str | None = None) -> list[dict]:
     """Return top-k verse chunks: {upanishad, ref, text, translator, score}."""
-    embedding = _model().encode([query], normalize_embeddings=True).tolist()
+    embedding = _model().encode([QUERY_PREFIX + query], normalize_embeddings=True).tolist()
     where = {"upanishad": upanishad} if upanishad else None
     res = _collection().query(
-        query_embeddings=embedding, n_results=k, where=where,
+        query_embeddings=embedding,
+        n_results=max(FETCH_K, k) if RERANKER else k,
+        where=where,
         include=["documents", "metadatas", "distances"],
     )
     hits = []
@@ -57,6 +80,11 @@ def retrieve(query: str, k: int = 5, upanishad: str | None = None) -> list[dict]
                 "score": round(1 - dist, 4),  # cosine similarity
             }
         )
+    if RERANKER and len(hits) > k:
+        scores = _reranker().predict([(query, h["text"]) for h in hits])
+        for h, s in zip(hits, scores):
+            h["score"] = round(float(s), 4)  # cross-encoder relevance score
+        hits = sorted(hits, key=lambda h: -h["score"])[:k]
     return hits
 
 
