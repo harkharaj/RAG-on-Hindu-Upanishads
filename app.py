@@ -3,7 +3,18 @@
 Run:  streamlit run app.py
 """
 
+import os
+
 import streamlit as st
+
+# Streamlit Cloud provides secrets via st.secrets, not os.environ. Bridge them
+# into the environment so src/generate.py (which reads os.environ["GROQ_API_KEY"])
+# finds the key. Wrapped in try/except so local runs using a .env still work.
+try:
+    for _k, _v in st.secrets.items():
+        os.environ.setdefault(_k, str(_v))
+except Exception:
+    pass
 
 from src.rag import ask
 
