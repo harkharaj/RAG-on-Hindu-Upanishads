@@ -1,6 +1,12 @@
 """Embed the processed verses and store them in a persistent ChromaDB index.
 
-Run once after ingest.py (and again whenever verses.json changes):
+Indexes every corpus found in data/processed/ into one collection, tagged
+with a "source" metadata field so retrieval can filter or compare:
+    verses.json      -> source "upanishads"
+    ashtavakra.json  -> source "ashtavakra"
+    gita.json        -> source "gita"
+
+Run once after the ingest scripts (and again whenever they change):
     python src/index.py
 """
 
@@ -12,7 +18,11 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSES_PATH = ROOT / "data" / "processed" / "verses.json"
+CORPORA = {
+    "upanishads": ROOT / "data" / "processed" / "verses.json",
+    "ashtavakra": ROOT / "data" / "processed" / "ashtavakra.json",
+    "gita": ROOT / "data" / "processed" / "gita.json",
+}
 CHROMA_PATH = ROOT / "data" / "chroma"
 COLLECTION = "upanishads"
 EMBEDDING_MODEL = os.environ.get(
@@ -22,7 +32,16 @@ BATCH = 256
 
 
 def main() -> None:
-    verses = json.loads(VERSES_PATH.read_text(encoding="utf-8"))
+    verses = []
+    for source, path in CORPORA.items():
+        if not path.exists():
+            print(f"NOTE: {path.name} not found, skipping source '{source}'")
+            continue
+        records = json.loads(path.read_text(encoding="utf-8"))
+        for r in records:
+            r.setdefault("source", source)
+        print(f"  {source}: {len(records)} chunks from {path.name}")
+        verses.extend(records)
     # ids from ingest are unique per section; make globally unique defensively
     seen: dict[str, int] = {}
     for v in verses:
@@ -51,6 +70,7 @@ def main() -> None:
             embeddings=embeddings.tolist(),
             metadatas=[
                 {
+                    "source": v["source"],
                     "upanishad": v["upanishad"],
                     "ref": v["ref"],
                     "translator": v.get("translator", ""),

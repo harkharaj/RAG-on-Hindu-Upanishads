@@ -57,10 +57,23 @@ def _reranker():
     return CrossEncoder(RERANKER)
 
 
-def retrieve(query: str, k: int = 5, upanishad: str | None = None) -> list[dict]:
-    """Return top-k verse chunks: {upanishad, ref, text, translator, score}."""
+def retrieve(
+    query: str,
+    k: int = 5,
+    upanishad: str | None = None,
+    source: str | None = None,
+) -> list[dict]:
+    """Return top-k verse chunks: {source, upanishad, ref, text, translator, score}.
+
+    source: "upanishads" or "ashtavakra" to search one corpus; None for both.
+    """
     embedding = _model().encode([QUERY_PREFIX + query], normalize_embeddings=True).tolist()
-    where = {"upanishad": upanishad} if upanishad else None
+    filters = []
+    if upanishad:
+        filters.append({"upanishad": upanishad})
+    if source:
+        filters.append({"source": source})
+    where = filters[0] if len(filters) == 1 else {"$and": filters} if filters else None
     res = _collection().query(
         query_embeddings=embedding,
         n_results=max(FETCH_K, k) if RERANKER else k,
@@ -73,6 +86,7 @@ def retrieve(query: str, k: int = 5, upanishad: str | None = None) -> list[dict]
     ):
         hits.append(
             {
+                "source": meta.get("source", "upanishads"),
                 "upanishad": meta["upanishad"],
                 "ref": meta["ref"],
                 "translator": meta.get("translator", ""),

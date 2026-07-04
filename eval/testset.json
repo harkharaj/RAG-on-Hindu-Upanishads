@@ -83,5 +83,107 @@
       {"upanishad": "Prasna", "refs": ["V-"]},
       {"upanishad": "Taittiriya", "refs": ["I-viii"]}
     ]
+  },
+
+  {
+    "question": "Who is the one witness and seer of all?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["1.7"]}]
+  },
+  {
+    "question": "What analogy of cloth and thread describes the universe and the Self?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["2.5"]}]
+  },
+  {
+    "question": "How does the universe rise from the Self like a bubble from the sea?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["5.2", "2.23", "2.4"]}]
+  },
+  {
+    "question": "When is freedom attained — what must the mind stop doing?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["8.2", "8.4", "10.4"]}]
+  },
+  {
+    "question": "Is there heaven or hell for one established in the yogic vision?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["18.80"]}]
+  },
+  {
+    "question": "Where is dream, deep sleep or wakefulness for one abiding in his own grandeur?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["19.5"]}]
+  },
+  {
+    "question": "Are you the body, the doer, or the enjoyer?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["15.4", "1.6", "8.4"]}]
+  },
+  {
+    "question": "What three questions did Janaka ask his teacher at the very beginning?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["1.1"]}]
+  },
+  {
+    "question": "'I am in everything, from Brahma down to a clump of grass' — what realization is this?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["11.7"]}]
+  },
+  {
+    "question": "Can one who has heard that the Self is pure Consciousness still be entangled in sense objects?",
+    "source": "ashtavakra",
+    "expected": [{"upanishad": "Ashtavakra", "refs": ["3.4"]}]
+  },
+
+  {
+    "question": "Is the Self ever born? Does it die when the body is slain?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["2.20", "2.21"]}]
+  },
+  {
+    "question": "What is the analogy of casting off worn-out clothes at death?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["2.22"]}]
+  },
+  {
+    "question": "Do we have a right to the fruits of our actions?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["2.47"]}]
+  },
+  {
+    "question": "When and why does the Lord incarnate in the world?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["4.7", "4.8"]}]
+  },
+  {
+    "question": "Is one one's own friend or one's own enemy?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["6.5", "6.6"]}]
+  },
+  {
+    "question": "What does the Lord carry and secure for those who worship him single-mindedly?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["9.22"]}]
+  },
+  {
+    "question": "Abandoning all duties, in whom should one take refuge, and what is promised?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["18.66"]}]
+  },
+  {
+    "question": "What is night for all beings but day for the restrained sage?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["2.69"]}]
+  },
+  {
+    "question": "What is the peepul tree with roots upward and branches downward, whose leaves are the Vedas?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["15.1"]}]
+  },
+  {
+    "question": "What is the field (kshetra), and who is the knower of the field?",
+    "source": "gita",
+    "expected": [{"upanishad": "Gita", "refs": ["13.2", "13.3"]}]
   }
 ]

@@ -6,10 +6,13 @@
 __pycache__/
 *.pyc
 
-# data: the PDF's translations are copyrighted (Ramakrishna Math, Advaita
-# Ashram, etc.) — keep the corpus and anything derived from it out of the
-# public repo. Rebuild locally with: python src/ingest.py && python src/index.py
+# data: the PDFs' translations are copyrighted (Ramakrishna Math, Advaita
+# Ashram, Chinmaya Mission, etc.) — keep the corpora and anything derived from
+# them out of the public repo. Rebuild locally with:
+#   python src/ingest.py && python src/ingest_ashtavakra.py && python src/index.py
 108upanishads.pdf
+ASHTAVAKRA_GITA.pdf
+Srimad-Bhagavad-Gita-Shankara-Bhashya-English.pdf
 data/
 
 # streamlit
@@ -20,3 +23,4 @@ data/
 
 # local build log / notes
 problems.md
+LEARNING.md
