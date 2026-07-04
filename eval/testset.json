@@ -1,0 +1,80 @@
+[
+  {
+    "question": "What is the parable of the two birds on the same tree?",
+    "expected": [
+      {"upanishad": "Mundaka", "refs": ["III-i-1", "III-i-2"]},
+      {"upanishad": "Svetasvatara", "refs": ["IV-6", "IV-7"]}
+    ]
+  },
+  {
+    "question": "Does truth or untruth ultimately prevail?",
+    "expected": [{"upanishad": "Mundaka", "refs": ["III-i-6"]}]
+  },
+  {
+    "question": "What is the analogy of the chariot for the body and the self?",
+    "expected": [{"upanishad": "Katha", "refs": ["1-III-3", "1-III-4", "1-III-5"]}]
+  },
+  {
+    "question": "What does 'That thou art' (Tat tvam asi) mean?",
+    "expected": [
+      {"upanishad": "Chandogya", "refs": ["VI-viii-7", "VI-ix-4", "VI-x-3", "VI-xi-3", "VI-xii-3", "VI-xiii-3", "VI-xiv-3", "VI-xv-3", "VI-xvi-3"]}
+    ]
+  },
+  {
+    "question": "What did Yama teach Nachiketas about the fire sacrifice that leads to heaven?",
+    "expected": [{"upanishad": "Katha", "refs": ["1-I-13", "1-I-14", "1-I-15", "1-I-16", "1-I-17", "1-I-18", "1-I-19"]}]
+  },
+  {
+    "question": "What are the three instructions given by the thunder: Da Da Da?",
+    "expected": [{"upanishad": "Brihadaranyaka", "refs": ["V-ii-1", "V-ii-2", "V-ii-3"]}]
+  },
+  {
+    "question": "Who impels the mind and the vital force to do their work?",
+    "expected": [{"upanishad": "Kena", "refs": ["I-1", "I-2"]}]
+  },
+  {
+    "question": "By renouncing what should one enjoy? Should we covet the wealth of others?",
+    "expected": [{"upanishad": "Isavasya", "refs": ["1"]}]
+  },
+  {
+    "question": "What are the four states of consciousness — waking, dream, deep sleep, and the fourth?",
+    "expected": [{"upanishad": "Mandukya", "refs": ["I-", "II-"]}]
+  },
+  {
+    "question": "Where is real happiness — in the finite or the infinite (Bhuma)?",
+    "expected": [{"upanishad": "Chandogya", "refs": ["VII-xxiii", "VII-xxiv"]}]
+  },
+  {
+    "question": "What is the eternal peepul (asvattha) tree with roots above and branches below?",
+    "expected": [{"upanishad": "Katha", "refs": ["2-III-1"]}]
+  },
+  {
+    "question": "Is Brahman truth, knowledge, and infinity?",
+    "expected": [{"upanishad": "Taittiriya", "refs": ["II-i-1"]}]
+  },
+  {
+    "question": "How is the Self described as 'not this, not this' (neti neti)?",
+    "expected": [
+      {"upanishad": "Brihadaranyaka", "refs": ["II-iii-6", "III-ix-26", "IV-ii-4", "IV-iv-22", "IV-v-15"]}
+    ]
+  },
+  {
+    "question": "What happens to the knower of the Self after the death of the body?",
+    "expected": [
+      {"upanishad": "Katha", "refs": ["1-II", "2-II"]},
+      {"upanishad": "Brihadaranyaka", "refs": ["IV-iv"]},
+      {"upanishad": "Chandogya", "refs": ["VIII-"]},
+      {"upanishad": "Prasna", "refs": ["VI-"]},
+      {"upanishad": "Mundaka", "refs": ["III-ii"]}
+    ]
+  },
+  {
+    "question": "What is the syllable Om and why is it the highest support?",
+    "expected": [
+      {"upanishad": "Katha", "refs": ["1-II-15", "1-II-16", "1-II-17"]},
+      {"upanishad": "Mandukya", "refs": ["I-1"]},
+      {"upanishad": "Prasna", "refs": ["V-"]},
+      {"upanishad": "Taittiriya", "refs": ["I-viii"]}
+    ]
+  }
+]
